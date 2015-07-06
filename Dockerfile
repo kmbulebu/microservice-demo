@@ -18,4 +18,4 @@ RUN /opt/apache-maven-3.3.3/bin/mvn verify
 
 EXPOSE 8080
 
-CMD /opt/apache-maven-3.3.3/bin/mvn spring-boot:run
+CMD java -jar target/microservice-demo.jar
