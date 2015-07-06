@@ -16,4 +16,6 @@ WORKDIR /usr/src/microservice-demo
 
 RUN /opt/apache-maven-3.3.3/bin/mvn verify
 
+EXPOSE 8080
+
 CMD /opt/apache-maven-3.3.3/bin/mvn spring-boot:run
