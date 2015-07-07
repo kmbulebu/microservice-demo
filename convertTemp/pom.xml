@@ -2,24 +2,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.kmbulebu</groupId>
-	<version>0.0.1-snapshot</version>
-	<artifactId>microservice-demo</artifactId>
-	<packaging>pom</packaging>
+	<parent>
+		<groupId>com.github.kmbulebu</groupId>
+		<version>0.0.1-snapshot</version>
+		<artifactId>microservice-demo</artifactId>
+	</parent>
+	<artifactId>convertTemp</artifactId>
+	<packaging>jar</packaging>
 
 	<url>https://github.com/kmbulebu</url>
 	<inceptionYear>2015</inceptionYear>
 
 	<name>${project.artifactId}</name>
-	<description>Sample microservice using Spring Boot</description>
+	<description>Sample microservice using Spring Boot + Integration</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<modules>
-		<module>convertTemp</module>
-	</modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -81,7 +80,41 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-logging</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-java-dsl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-ws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-xml</artifactId>
+		</dependency>
+	</dependencies>
+
 	<build>
+		<finalName>${artifactId}</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -102,5 +135,18 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>
